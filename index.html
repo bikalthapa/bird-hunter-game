@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+<HTML>
+    <head>
+        <meta name="viewport" width="device-width" scale="1.0">
+        <title>Hunter Game</title>
+    </head>
+    <body>
+        <div id="MainDiv">
+            <div id="TitleDiv">
+                <h1>Bird Hunter Game</h1>
+                <h3 id="Game"></h3>
+                <h4 id="ScoreArea">Your Score : 0</h4>
+                <h4 id="Bullet">No of bullet : 15</h4>
+                <button id="PlayAgain" class="invisible" onclick="PlayAgain()">Play Again</button>
+            </div>
+
+            <div onclick="outshoot()" id="HuntingDiv">
+          <marquee><marquee><span onclick="shoot()" id="bird1"><img src="p1.png"></span></marquee></marquee><br>
+           <marquee><marquee><span onclick="shoot1()" id="bird2"><img src="p2.png"></span></marquee></marquee><br>
+           <marquee><marquee><marquee><span onclick="shoot2()" id="bird3"><img src="p3.png"></span></marquee></marquee></marquee>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            // Declaring Variables
+            let score = document.getElementById("ScoreArea");
+            let bullet = document.getElementById("Bullet");
+            let game = document.getElementById("Game");
+            let playbtn = document.getElementById("PlayAgain");
+            let scr = 0;
+            let bulletno = 15;
+            let huntdiv = document.getElementById("HuntingDiv");
+
+            // Declaring variables for birds
+            let bird1 = document.getElementById("bird1");
+            let bird2 = document.getElementById("bird2");
+            let bird3 = document.getElementById("bird3");
+
+
+            // Making Shooting Effects Function
+            function shoot(){
+                scr ++;
+                score.innerHTML = "Your Score : " + scr;
+                bird1.classList.add("invisible");
+                function end(){
+                    bird1.classList.remove("invisible");
+                };
+                setTimeout(end,7000);
+            };
+
+            function shoot1(){
+                scr ++;
+                score.innerHTML = "Your Score : " + scr;
+                bird2.classList.add("invisible");
+                function end1(){
+                    bird2.classList.remove("invisible");
+                };
+                setTimeout(end1,7000);
+            };
+
+            function shoot2(){
+                scr ++;
+                score.innerHTML = "Your Score : " + scr;
+                bird3.classList.add("invisible");
+                function end3(){
+                    bird3.classList.remove("invisible");
+                };
+                setTimeout(end3,15000);
+            };
+
+
+            function outshoot(){
+                const audio = new Audio();
+                audio.src="gunshot.mp3";
+                audio.play();
+
+                bulletno --;
+                bullet.innerHTML = "No of bullet : " + bulletno;
+
+                if(bulletno==0){
+                    game.innerHTML = "Game Over";
+                    playbtn.classList.remove("invisible");
+                    huntdiv.style="opacity:0.5; pointer-events:none;";
+                    const gameover = new Audio();
+                    gameover.src = "GameOver.mp3";
+                    gameover.play();
+                };
+            };
+
+            function PlayAgain(){
+                playbtn.classList.add("invisible");
+                scr = 0;
+                bulletno = 15;
+                score.innerHTML = "Your Score : " + scr;
+                bullet.innerHTML = "No of bullet : " + bulletno;
+                game.innerHTML = "";
+                huntdiv.style="opacity:1; pointer-events:;";
+                
+            };
+
+
+        </script>
+
+<style type="text/css">
+    #TitleDiv{
+        background-color:aquamarine;
+        padding:15px;
+        cursor:pointer;
+        text-align:center;
+    }
+    @keyframes duckfly{
+    }  
+    img{
+        position:relative;
+        max-height:70px;
+        animation-name:duckfly;
+        animation-duration:6s;
+        animation-iteration-count: infinite;
+
+
+    }
+    #HuntingDiv{
+        background:url(background3.jfif);
+        min-height:450px;
+        border-style:solid 1px;
+        cursor:crosshair;
+        background-size:cover;
+    }
+
+    .invisible{
+        display:none;
+    } 
+    #Game{
+        color:red;
+    } 
+    
+
+</style>
+    </body>
+</html>
